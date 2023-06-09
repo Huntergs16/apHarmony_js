@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javscript Practice</title>
+</head>
+<body>
+    <div style="border: 1px; border-style: solid; border-color: black;">
+        <h2>toggle</h2>
+        <button id="toggleAnswer">Click to toggle yes and no</button>
+        <div>
+            <p>Are you cool ?</p>
+            <p id="answer">No</p>
+        </div>
+    </div>
+
+    <div style="border: 1px; border-style: solid; border-color: black;">
+        <h2>name input</h2>
+        <input id="nameInput" type="text" placeholder="name" />
+        <button id="nameSubmit">Submit</button>
+        <div>
+            <p>What's your name?</p>
+            <div id="nameDisplay"></div>
+            <div>Mirrored:<div id="nameMirror"></div></div>
+        </div>
+    </div>
+
+    <div style="border: 1px; border-style: solid; border-color: black;">
+        <h2>fake login</h2>
+        <form>
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" placeholder="Hunter123!"/>
+
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="********"/>
+            <button id="showButton">show</button>
+        </form>
+    </div>
+
+    <div style="border: 1px; border-style: solid; border-color: black;">
+        <h2>html substitution</h2>
+        <div id="parentContainer">
+            <!-- Placeholder for substituted content -->
+        </div>
+
+        <button id="substituteButton">Substitute Content</button>
+    </div>
+
+    <div style="border: 1px; border-style: solid; border-color: black;">
+        <h2>to do list creator</h2>
+        <input type="text" placeholder="to-do" id="toDoItem"/>
+        <button id="toDoButton">Add to do</button>
+        <h3>To do:</h3>
+        <div id="toDoList"></div>
+    </div>
+
+</body>
+
+<script>
+    var answerButton = document.querySelector('#toggleAnswer')
+    var answer = document.querySelector('#answer')
+
+    answerButton.addEventListener('click', () => {
+        nextAnswer = answer.innerHTML === "Yes" ? "No" : "Yes"
+        answer.innerHTML = nextAnswer;
+        console.log("switch clicked")
+    });
+</script>
+
+<script>
+    var nameInput = document.querySelector('#nameInput')
+    var nameSubmitButton = document.querySelector('#nameSubmit')
+    var nameDisplayOnce = document.querySelector('#nameDisplay')
+    var nameMirror = document.querySelector('#nameMirror')
+
+    nameSubmitButton.addEventListener('click', () => {
+        console.log("Name button clicked!", nameInput.value)
+        nameDisplayOnce.innerHTML = nameInput.value
+    });
+
+    nameInput.addEventListener('keyup', () => {
+        console.log("Name input changed!", nameInput.value)
+        nameMirror.innerHTML = nameInput.value
+    });
+</script>
+
+<script>
+    var username = document.querySelector('#username')
+    var password = document.querySelector('#password')
+    var passwordToggle = document.querySelector('#showButton')
+
+    passwordToggle.addEventListener('click', (event) => {
+        event.preventDefault();
+        nextPasswordType = password.type === "password" ? "text" : "password"
+        password.type = nextPasswordType
+    });
+
+</script>
+
+<script>
+    // Get the parent container
+    var parentContainer = document.getElementById('parentContainer');
+
+    // Get the substitute button
+    var substituteButton = document.getElementById('substituteButton');
+
+    // Add event listener to the substitute button
+    substituteButton.addEventListener('click', function() {
+        // Generate the new HTML content to substitute
+        var newContent = '<h2>New Content</h2><p>This is the substituted content.</p>';
+
+        // Replace the existing content in the parent container
+        parentContainer.innerHTML = newContent;
+    });
+</script>
+
+<script>
+    
+    var toDoItem = document.querySelector('#toDoItem')
+    var toDoButton = document.querySelector('#toDoButton')
+    var toDoList = document.querySelector('#toDoList')
+
+    toDoButton.addEventListener('click', () => {
+        if (toDoItem.value === "") {
+            console.log("Empty toDo.")
+        }
+        else {
+            console.log("to do button clicked!", toDoItem.value)
+            toDoList.innerHTML += `<div style="width: 30px; height: 50px;">${toDoItem.value}</div>`
+        }
+    })
+
+    toDoList.addEventListener('click', (event) => {
+        console.log("to do list clicked!", event.target)
+        event.target.remove()
+    })
+
+</script>
+
+</html>
